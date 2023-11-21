@@ -1,4 +1,5 @@
 ﻿using Wema.BIT.Models;
+using static Wema.BIT.Models.AreaOfTraingle;
 
 namespace Wema.BIT.User
 {
@@ -6,16 +7,18 @@ namespace Wema.BIT.User
     {
         public static void Main(String[] args)
         {
-            // See https://aka.ms/new-console-template for more information
-            Console.WriteLine("Hello " + "Tbams");
+            Triangle myTriangle = new Triangle();
 
-            //Payment.Greet();
-            //Payment p = new Payment();
-            //p.GreetMe();
+            // Input base and height values
+            Console.WriteLine("Enter the base of the triangle:");
+            myTriangle.Base = Convert.ToDouble(Console.ReadLine());
 
-            //string greet = p.GreetMe();
+            Console.WriteLine("Enter the height of the triangle:");
+            myTriangle.Height = Convert.ToDouble(Console.ReadLine());
 
-            //Console.WriteLine(greet);
+            // Calculate and display the area
+            double area = myTriangle.CalculateArea();
+            Console.WriteLine($"The area of the triangle is: {area}");
 
             List<UsersList> usersLists = new List<UsersList>()
             {
