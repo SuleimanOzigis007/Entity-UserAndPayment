@@ -12,5 +12,6 @@ namespace Wema.BIT.Models
         public string First_Name { get; set; } = string.Empty;
         public string Last_Name { get; set; } = string.Empty;
         public string Email { get; set;} = string.Empty;
+        public List<Transaction> Transactions { get; set; } 
     }
 }
