@@ -15,7 +15,9 @@ namespace Wema.BIT.IRepository.Repository
         public UserRepository()
         {
             usersLists = new List<UsersList>();
+
         }
+      
         public int AddNumber(int a, int b)
         {
             throw new NotImplementedException();
@@ -32,23 +34,28 @@ namespace Wema.BIT.IRepository.Repository
         {
             return usersLists;
         }
-
-        public void DeletUser()
+        public UsersList DeletUser(UsersList usersList)
         {
-            throw new NotImplementedException();
+            usersLists.Remove(usersList);
+  
+            return usersList;
+        }
+        public UsersList EditUser(UsersList usersListss)
+        {
+            if(usersListss.Id <= 0)
+            {
+                usersListss.First_Name = "new first name";
+                usersListss.Last_Name = "new last name";
+                usersListss.Email = "new email";
+                return usersListss;
+            }
+            else
+                return null;
+        }
+        public UsersList ViewUser(UsersList usersListsss)
+        {
+            return usersListsss;
         }
 
-        public void EditUser()
-        {
-            throw new NotImplementedException();
-        }
-
-       
-
-        public void ViewUser()
-        {
-            throw new NotImplementedException();
-        }
     }
-
 }

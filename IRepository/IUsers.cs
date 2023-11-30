@@ -11,11 +11,11 @@ namespace Wema.BIT.IRepository
     {
         public UsersList AddUser(UsersList usersList);
         List<UsersList> GetAllUsers();
-        public void DeletUser();
+        public UsersList DeletUser(UsersList usersLists);
 
-        public void EditUser();
-        public void ViewUser();
+        public UsersList EditUser(UsersList usersListss);
+        public UsersList ViewUser(UsersList usersListsss);
         public int AddNumber(int a, int b);
-
+      //  UsersList DeletUser(UsersList users);
     }
 }

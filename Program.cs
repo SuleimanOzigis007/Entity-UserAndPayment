@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Security.Cryptography.X509Certificates;
 using Wema.BIT.IRepository;
 using Wema.BIT.IRepository.Repository;
 using Wema.BIT.Models;
@@ -8,7 +9,7 @@ namespace Wema.BIT.User
 {
     public class User
     {
-
+      
         private readonly IUsers _u;
         private readonly IUsers _context;
         private static int num = 0;
@@ -24,13 +25,70 @@ namespace Wema.BIT.User
 
         public static void Main(String[] args)
         {
+
+            string Word = "Madam";
+            string reversedWord = ReverseWord(Word);
+
+
+            bool isPalindrome = IsPalindrome(Word);
+
+            Console.WriteLine($"Original Word: {Word}");
+            Console.WriteLine($"Reversed Word: {reversedWord}");
+            Console.WriteLine($"Characters are the same: {isPalindrome}");
+
+
+            static string ReverseWord(string str)
+            {
+                char[] charArray = str.ToCharArray();
+                Array.Reverse(charArray);
+                return new string(charArray);
+            }
+
+            static bool IsPalindrome(string str)
+            {
+                string reversedString = ReverseWord(str);
+                return str.Equals(reversedString, StringComparison.OrdinalIgnoreCase);
+            }
             UserRepository contextt = new UserRepository();
+
+            var viewUsers = contextt.GetAllUsers();
             var usr = new UsersList
             {
+                Id = 1,
                 Email = "johndoe@email.com",
                 First_Name = "John",
+                Last_Name = "Doe",
             };
-            contextt.AddUser(usr);
+
+            var usersls = contextt.AddUser(usr);
+
+            ViewUser(viewUsers);
+
+            static void ViewUser(List<UsersList> usersls)
+            {
+                foreach (var user in usersls)
+                {
+                    Console.WriteLine($"User Details:");
+                    Console.WriteLine($"ID: {user.Id}");
+                    Console.WriteLine($"First Name: {user.First_Name}");
+                    Console.WriteLine($"Last Name: {user.Last_Name}");
+                    Console.WriteLine($"Email: {user.Email}");
+                    Console.WriteLine("List Empty");
+                }
+
+            }
+
+
+
+
+            var userl = new UsersList
+            {
+                Id = 1,
+                First_Name = "John"
+            };
+            contextt.DeletUser(userl);
+
+            Console.WriteLine($"User with FirstName {userl.First_Name} deleted.");
 
 
             Console.WriteLine("List of Users:");
@@ -45,6 +103,20 @@ namespace Wema.BIT.User
                 {
                     Console.WriteLine($"Name: {user.First_Name} {user.Last_Name}, Email: {user.Email}");
                 }
+
+                var originalUser = new UsersList
+                {
+                    Id = 1,
+                    First_Name = "John"
+                };
+                var modifiedUser = new UsersList
+                {
+                    Id = originalUser.Id,
+                    First_Name = "Updated John"
+                };
+                contextt.EditUser(modifiedUser);
+
+                Console.WriteLine($"User with FirstName {originalUser.First_Name} updated to {modifiedUser.First_Name}.");
 
                 // Console.WriteLine(uu.AddNumber(23, 55));
                 Console.WriteLine(num);
@@ -160,6 +232,7 @@ namespace Wema.BIT.User
         }
     }
 }
+
     //public class Payment
     //{
        // public static void Greet()
